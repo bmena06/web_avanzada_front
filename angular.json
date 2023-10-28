@@ -90,7 +90,8 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/app/login/Logoblanco.png"
             ],
             "styles": [
               "src/styles.scss"
@@ -100,5 +101,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "e11150a5-5818-4f83-8e7a-9518151fefa5"
   }
 }
