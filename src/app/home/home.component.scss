@@ -1,0 +1,72 @@
+h1 {
+    text-align: left;
+    font-weight: bold;
+    font-size: 22px;
+    font-family: 'Inter', sans-serif;
+    margin-top: 35px;
+    margin-right: 40px;
+   
+}
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+  
+
+.container {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex; /* Establece el contenedor como un flex container */
+    flex: 1; /* Las columnas se expandirán para ocupar el espacio disponible de manera equitativa */
+    padding: 20px;  /* Agrega espaciado interno a las columnas */
+    border: 1px solid #ddd; /* Agrega un borde para separar las columnas (opcional) */
+    background-color: #f0f0f0; /* Color de fondo de las columnas (opcional) */
+    margin-left: -10px;
+
+}
+.icono{
+    margin-left: 450px;
+    max-width: 100%; /* La imagen no será más ancha que la columna */
+    max-height: 100%; /* La imagen no será más alta que la columna */
+    width: 15%; /* Permite que la imagen conserve su relación de aspecto original */
+}
+
+.logo{
+    margin-left: 520px;
+}
+.column {
+    padding: 20px; /* Agrega espaciado interno a las columnas */
+     /* Agrega un borde para separar las columnas (opcional) */
+    background-color: #f0f0f0; /* Color de fondo de las columnas (opcional) */
+    margin-left: 100px; /* Márgenes entre las columnas (opcional) */
+}
+
+.hamburger-lines {
+    margin-top: 50px;
+    margin-left: 50px;
+
+    display: block;
+    height: 26px;
+    width: 32px;
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.line {
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: #0e2431;
+}
+
+  

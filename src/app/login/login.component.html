@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -19,17 +17,17 @@
         <div class="contenido-tab">
             <!-- Iniciar Sesion -->
             <div id="iniciar-sesion">
-                    <div class="contenedor-input">
-                        <img src="assets/Logoblanco.png" alt="LOGO">
-                        <h1>Usuario</h1>
-                        <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu Usuario..." required>
-                    </div>
+                <div class="contenedor-input">
+                    <img src="assets/Logoblanco.png" alt="LOGO">
+                    <h1>Usuario</h1>
+                    <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu Usuario..." required>
+                </div>
                     
-                    <div class="contenedor-input">
-                        <h1>Contraseña</h1>
-                        <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu Contraseña..." required>
-                    </div>
-                    <input type="button" class="button button-block" (click)="redirectToHome()" value="Entrar">
+                <div class="contenedor-input">
+                    <h1>Contraseña</h1>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu Contraseña..." required>
+                </div>
+                <input type="button" class="button button-block" routerLink="/home" value="Entrar">
             </div>
         </div>
     </div>
@@ -38,4 +36,3 @@
    <script src="js/main.js"></script>
 
 </body>
-</html>

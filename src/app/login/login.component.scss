@@ -19,7 +19,7 @@ $fuente-secundaria: "Raleway", arial;
 
 body {
     background: $body-bg;
-    font-family: $fuente-principal;
+    font-family: $fuente-principal;   
 }
 
 a {
@@ -97,6 +97,8 @@ input {
     width: 90%; /* Ancho deseado */
     height: 80px; /* Altura deseada */
     margin-bottom: 40%; /* Espacio entre la imagen y el título */
+
+    
 }
 
 

@@ -9,8 +9,5 @@ import { Router } from '@angular/router';
 
 export class LoginComponent {
   constructor(private router: Router) {}
-
-  redirectToHome() {
-    this.router.navigate(['home']); // Redirige a la ruta de inicio (en este caso, Home).
-  }
+  
 }
