@@ -2,25 +2,204 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="home.component.scss">
+
+    
 </head>
-<body style="background-color: aquas;">
-    <div class="container">
-        <div class="column">
-            <div class="hamburger-lines">
-                <span class="line line1"></span>
-                <span class="line line2"></span>
-                <span class="line line3"></span>
-            </div>  
+
+<body>
+    <div class="body-containers">
+        <div class="container">
+            <div class="column">
+                <div class="menu-column"> 
+                    <img class="menu" src="assets/menu.png" alt="menu">
+                </div>
+            </div>
+            <div class="column">
+                <div class="logo-column"> 
+                    <img class="logo" src="assets/Azul.png" alt="logo">
+                </div>
+            </div>
+            <div class="column">
+                <div class="user-column"> 
+                    <div class="column2">
+                        <img class="icono" src="assets/image.png" alt="User">
+                    </div>
+                    <div class="column2">
+                        <h1>Usuario</h1>
+                        <h1>Rol</h1>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="column">
-            <img class="logo"src="assets/Azul.png" alt="LOGO">
+        <div class="container2">
+            <div class="column3">
+                <div class="modulo">
+                    <h4>Producciones</h4>
+                </div>
+                <div class="modulo2  my-4">
+                    <table datatable [dtOptions]="dtoptions" class="custom-table table table-striped" id="example">
+                        <thead>
+                          <tr>
+                            <th>Columna 1</th>
+                            <th>Columna 2</th>
+                            <!-- ... Agrega las demás columnas según tus datos ... -->
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                           <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                           <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                           <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                           <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                           <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                           <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                           <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                          <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+                           <tr>
+                            <td>Dato 1</td>
+                            <td>Dato 2</td>
+                            <!-- ... Agrega los demás datos según tus datos ... -->
+                          </tr>
+
+                          
+                          <!-- ... Agrega más filas según tus datos ... -->
+                        </tbody>
+                      </table>
+                      
+                </div>
+            </div>
+            <div class="column4">
+                <div class="modulo-create">
+                    <h4 class="create">Crear Produccion</h4>
+                    <input class="text2" type="text" id="usuario" name="usuario" placeholder="ID Producto" required>
+                    <input class="textlist" type="text" id="usuario" name="usuario" placeholder="Producto" required>
+                    <input type="button" class="button" value="Registrar">
+                </div>
+            </div>
         </div>
-        <div class="column">
-            <img class="icono" src="assets/Iconouser.png" alt="User">
-        </div>
+        
     </div>
+    <!-- Bootstrap-->
 </body>
 </html>

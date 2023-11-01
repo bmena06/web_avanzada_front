@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NavComponent } from './nav/nav.component';
-
+import { FormsModule } from '@angular/forms'; // Asegúrate de tener esta importación
+import {DataTablesModule} from 'angular-datatables'
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,6 +17,8 @@ import { NavComponent } from './nav/nav.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
+    DataTablesModule
   ],
   providers: [],
   bootstrap: [AppComponent] // Cambia el bootstrap a AppComponent
