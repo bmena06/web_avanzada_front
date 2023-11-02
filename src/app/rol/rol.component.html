@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="rol.component.scss">
+</head>
+
+<body>
+    <div class="body-containers">
+        <div class="container">
+            <div class="column">
+                <div class="menu-column"> 
+                    <img class="menu" src="assets/menu.png" alt="menu">
+                </div>
+            </div>
+            <div class="column">
+                <div class="logo-column"> 
+                    <img class="logo" src="assets/Azul.png" alt="logo">
+                </div>
+            </div>
+            <div class="column">
+                <div class="user-column"> 
+                    <div class="column2">
+                        <img class="icono" src="assets/image.png" alt="User">
+                    </div>
+                    <div class="column2">
+                        <h1>Usuario</h1>
+                        <h1>Rol</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container2">
+            <div class="column3">
+                <div class="modulo">
+                    <h4>Rol</h4>
+                </div>
+                <div class="modulo2 my-4">
+                    <table datatable [dtOptions]="dtoptions" class="custom-table table table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>ID</th> 
+                                <th>Nombre</th> 
+                                <th>Compensación</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dato 1</td>
+                                <td>Dato 2</td>
+                                <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+                            <tr>
+                              <td>Dato 1</td>
+                              <td>Dato 2</td>
+                              <td>Dato 3</td> 
+                            </tr>
+
+                            
+                            <!-- Agregar más filas y datos según tus necesidades -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="column4">
+                <div class="modulo-create">
+                    <h4 class="create">Crear Rol</h4>
+                    <input class="text2" type="text" id="idRol" name="idRol" placeholder="ID Rol" required>
+                    <input class="textlist" type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                    <input class="textlist2" type="number" id="compensacion" name="compensacion" placeholder="Compensación" required>
+                    <input type="button" class="button" value="Crear Rol">
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
