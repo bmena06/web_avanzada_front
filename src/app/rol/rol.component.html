@@ -13,7 +13,22 @@
         <div class="container">
             <div class="column">
                 <div class="menu-column"> 
+                  <button (click)="sidebarShow = !sidebarShow" *ngIf="!sidebarShow">
                     <img class="menu" src="assets/menu.png" alt="menu">
+                  </button>
+                  <div class="sidebar" [class.slide-in]="sidebarShow">
+                    <div class="close" (click)="sidebarShow = !sidebarShow">X</div>
+                    <div class="content">
+                      <img class="Logoblanco" src="assets/Logoblanco.png" alt="Logoblanco">
+                      <a href="#" [class.active]="activeLink === 'payments'" (click)="activeLink = '/payments'">Pagos</a>
+                      <a href="#" [class.active]="activeLink === 'packages'" (click)="activeLink = 'packages'">Paquetes</a>
+                      <a href="#" [class.active]="activeLink === 'productions'" (click)="activeLink = 'productions'">Producciones</a>
+                      <a href="#" [class.active]="activeLink === 'products'" (click)="activeLink = 'products'">Productos</a>
+                      <a href="#" [class.active]="activeLink === 'roles'" (click)="activeLink = 'roles'">Roles</a>
+                      <a href="#" [class.active]="activeLink === 'users'" (click)="activeLink = 'users'">Usuarios</a>
+                      <button class="logout-button">Cerrar Sesión</button>
+                    </div>
+                  </div>
                 </div>
             </div>
             <div class="column">

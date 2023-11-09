@@ -11,6 +11,8 @@ declare var $: any;
 export class UserComponent implements OnInit{
   dtoptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
+  sidebarShow: boolean = false;
+  activeLink: string = '';
   
   ngOnInit(): void {
 
@@ -30,5 +32,6 @@ export class UserComponent implements OnInit{
       ],
     }
   }
+  isMenuOpen: boolean = false;
 }
 

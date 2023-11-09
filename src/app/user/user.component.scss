@@ -262,3 +262,100 @@ input.button {
         background: $color-principal;
     }
 }
+
+//menu
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #4451ff;
+    transform: translateX(-100%);
+    transition: ease-in-out 300ms transform;
+    width: 300px;
+    &.slide-in {
+      transform: translateX(0%);
+      transition: ease-in-out 600ms transform;
+    }
+    .close {
+      position: fixed;
+      top: 0;
+      right: 0;
+      color: white;
+      cursor: pointer;
+      padding: 16px;
+    }
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-direction: column;
+      color: white;
+      font-size: 16px;
+      padding: 16px;
+      height: 100%;
+    }
+  }
+
+
+.Logoblanco {
+    width: 80%;
+}
+
+a {
+    
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s;
+    font-size: 25px;
+    transition: transform 0.3s;
+  }
+  
+  a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+  }
+  a.active {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+
+  }
+  a:active,  a:focus  {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+    border: 2px solid white; 
+  padding: 8px 18px; 
+  border-radius: 4px; 
+    
+  }
+  .logout-button {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    border-top-left-radius: 20px;  
+    border-top-right-radius: 20px;  
+    border-bottom-left-radius: 20px;  
+    border-bottom-right-radius: 20px;  
+  }
+  
+  .logout-button:hover {
+    background-color: darkred;
+  }
+  button{
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid rgb(255, 255, 255);
+    
+  }

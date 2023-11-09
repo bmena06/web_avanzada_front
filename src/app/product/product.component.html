@@ -10,126 +10,150 @@
 
 <body>
     <div class="body-containers">
-        <div class="container">
-            <div class="column">
-                <div class="menu-column"> 
-                    <img class="menu" src="assets/menu.png" alt="menu">
-                </div>
+      <div class="container">
+        <div class="column">
+          <div class="menu-column">
+            <button (click)="sidebarShow = !sidebarShow" *ngIf="!sidebarShow">
+              <img class="menu" src="assets/menu.png" alt="menu">
+            </button>
+            <div class="sidebar" [class.slide-in]="sidebarShow">
+              <div class="close" (click)="sidebarShow = !sidebarShow">X</div>
+              <div class="content">
+                <img class="Logoblanco" src="assets/Logoblanco.png" alt="Logoblanco">
+                <a href="#" [class.active]="activeLink === 'payments'" (click)="activeLink = 'payments'">Pagos</a>
+                <a href="#" [class.active]="activeLink === 'packages'" (click)="activeLink = 'packages'">Paquetes</a>
+                <a href="#" [class.active]="activeLink === 'productions'" (click)="activeLink = 'productions'">Producciones</a>
+                <a href="#" [class.active]="activeLink === 'products'" (click)="activeLink = 'products'">Productos</a>
+                <a href="#" [class.active]="activeLink === 'roles'" (click)="activeLink = 'roles'">Roles</a>
+                <a href="#" [class.active]="activeLink === 'users'" (click)="activeLink = 'users'">Usuarios</a>
+                <button class="logout-button">Cerrar Sesión</button>
+              </div>
             </div>
-            <div class="column">
-                <div class="logo-column"> 
-                    <img class="logo" src="assets/Azul.png" alt="logo">
-                </div>
-            </div>
-            <div class="column">
-                <div class="user-column"> 
-                    <div class="column2">
-                        <img class="icono" src="assets/image.png" alt="User">
-                    </div>
-                    <div class="column2">
-                        <h1>Usuario</h1>
-                        <h1>Rol</h1>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-        <div class="container2">
-            <div class="column3">
-                <div class="modulo">
-                    <h4>Productos</h4>
-                </div>
-                <div class="modulo2 my-4">
-                    <table datatable [dtOptions]="dtoptions" class="custom-table table table-striped" id="example">
-                        <thead>
-                            <tr>
-                                <th>ID</th> 
-                                <th>Nombre</th> 
-                                <th>Precio</th> 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Dato 1</td>
-                                <td>Dato 2</td>
-                                <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-
-                            
-                            <!-- Agregar más filas y datos según tus necesidades -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="column4">
-                <div class="modulo-create">
-                    <h4 class="create">Crear Producto</h4>
-                    <input class="text2" type="text" id="idProducto" name="idProducto" placeholder="ID Producto" required>
-                    <input class="textlist" type="text" id="nombre" name="nombre" placeholder="Nombre" required>
-                    <input class="textlist2" type="number" id="precio" name="precio" placeholder="Precio" required>
-                    <input type="button" class="button" value="Crear Producto">
-                </div>
-            </div>
+        <div class="column">
+          <div class="logo-column">
+            <img class="logo" src="assets/Azul.png" alt="logo">
+          </div>
         </div>
+        <div class="column">
+          <div class="user-column">
+            <div class="column2">
+              <img class="icono" src="assets/image.png" alt="User">
+            </div>
+            <div class="column2">
+              <h1>Usuario</h1>
+              <h1>Rol</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container2">
+        <div class="column3">
+          <div class="modulo">
+            <h4>Productos</h4>
+          </div>
+          <div class="modulo2 my-4">
+            <!-- Tu contenido principal aquí -->
+            <table datatable [dtOptions]="dtoptions" class="custom-table table table-striped" id="example">
+              <thead>
+                <tr>
+                    <th>ID</th> 
+                    <th>Nombre</th> 
+                    <th>Precio</th> 
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td>Dato 1</td>
+                    <td>Dato 2</td>
+                    <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+                <tr>
+                  <td>Dato 1</td>
+                  <td>Dato 2</td>
+                  <td>Dato 3</td> 
+                </tr>
+              
+                
+                <!-- Agregar más filas y datos según tus necesidades -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="column4">
+          <div class="modulo-create">
+            <h4 class="create">Crear Producto</h4>
+            <!-- Formulario de creación de productos aquí -->
+            <input class="text2" type="text" id="idProducto" name="idProducto" placeholder="ID Producto" required>
+            <input class="textlist" type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+            <input class="textlist2" type="number" id="precio" name="precio" placeholder="Precio" required>
+            <input type="button" class="button" value="Crear Producto">
+          </div>
+        </div>
+      </div>
+      
     </div>
 </body>
 </html>
+
+
+
+
+
+
