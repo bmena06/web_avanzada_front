@@ -6,32 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="home.component.scss">
-
-    
 </head>
 
 <body>
     <div class="body-containers">
         <div class="container">
             <div class="column">
-                <div class="menu-column"> 
-                  <button (click)="sidebarShow = !sidebarShow" *ngIf="!sidebarShow">
-                    <img class="menu" src="assets/menu.png" alt="menu">
-                  </button>
-                  <div class="sidebar" [class.slide-in]="sidebarShow">
-                    <div class="close" (click)="sidebarShow = !sidebarShow">X</div>
-                    <div class="content">
-                      <img class="Logoblanco" src="assets/Logoblanco.png" alt="Logoblanco">
-                      <a href="#" [class.active]="activeLink === 'payments'" (click)="activeLink = 'payments'">Pagos</a>
-                      <a href="#" [class.active]="activeLink === 'packages'" (click)="activeLink = 'packages'">Paquetes</a>
-                      <a href="#" [class.active]="activeLink === 'productions'" (click)="activeLink = 'productions'">Producciones</a>
-                      <a href="#" [class.active]="activeLink === 'products'" (click)="activeLink = 'products'">Productos</a>
-                      <a href="#" [class.active]="activeLink === 'roles'" (click)="activeLink = 'roles'">Roles</a>
-                      <a href="#" [class.active]="activeLink === 'users'" (click)="activeLink = 'users'">Usuarios</a>
-                      <button class="logout-button">Cerrar Sesión</button>
-                    </div>
-                  </div>
-                </div>
+                <app-menu></app-menu>
             </div>
             <div class="column">
                 <div class="logo-column"> 
@@ -61,7 +42,6 @@
                           <tr>
                             <th>Columna 1</th>
                             <th>Columna 2</th>
-                            <!-- ... Agrega las demás columnas según tus datos ... -->
                           </tr>
                         </thead>
                         <tbody>
@@ -70,138 +50,8 @@
                             <td>Dato 2</td>
                             <!-- ... Agrega los demás datos según tus datos ... -->
                           </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                           <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                           <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                           <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                           <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                           <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                           <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                           <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-                           <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
-
-                          
-                          <!-- ... Agrega más filas según tus datos ... -->
                         </tbody>
-                      </table>
-                      
+                    </table>
                 </div>
             </div>
             <div class="column4">

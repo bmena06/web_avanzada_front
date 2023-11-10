@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-
+import { DataService } from '../produccion.service';
 declare var $: any;
 
 @Component({
@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit{
   dtTrigger: Subject<any> = new Subject<any>();
   sidebarShow: boolean = false;
   activeLink: string = '';
-  
   ngOnInit(): void {
 
     this.dtoptions = {

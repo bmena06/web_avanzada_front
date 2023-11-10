@@ -11,6 +11,7 @@ import { RolComponent } from './rol/rol.component';
 import { PaymentComponent } from './payment/payment.component';
 import { UserComponent } from './user/user.component';
 import { PackageComponent } from './package/package.component';
+import { MenuComponent } from './menu/menu.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { PackageComponent } from './package/package.component';
     RolComponent,
     PaymentComponent,
     UserComponent,
-    PackageComponent
+    PackageComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
