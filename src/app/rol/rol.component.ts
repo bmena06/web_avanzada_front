@@ -1,5 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 import { Subject } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataTableDirective } from 'angular-datatables';
 
 declare var $: any;
 
@@ -8,29 +11,124 @@ declare var $: any;
   templateUrl: './rol.component.html',
   styleUrls: ['./rol.component.scss'],
 })
-export class RolComponent implements OnInit{
+export class RolComponent implements OnInit, OnDestroy {
+  rolData: any;
   dtoptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-  sidebarShow: boolean = false;
-  activeLink: string = '';
-  
-  ngOnInit(): void {
+  newRolForm: FormGroup;
+  selectedRoleId: number | null = null;
 
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective | any;
+
+  constructor(
+    private dataService: DataService,
+    private fb: FormBuilder
+  ) {
+    this.newRolForm = this.fb.group({
+      id: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      compensation: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+    });
+  }
+
+  ngOnInit(): void {
     this.dtoptions = {
       scrollY: 300,
       language: {
-        searchPlaceholder: "Buscar rol"
+        searchPlaceholder: 'Buscar roles',
       },
       pagingType: 'full_numbers',
-      columnDefs: [
-        {
-          targets: -1, // Índice de la última columna
+      paging: true,
+      pageLength: 9,
+    };
+
+    // Inicializa DataTables en el evento ngOnInit
+    this.dtTrigger.next(null);
+
+    
+    // Llama a la carga de datos después de inicializar DataTables
+    this.loadRolData();
+  }
+
+  
+  ngOnDestroy(): void {
+    // Utiliza dtTrigger.complete() para completar la suscripción
+    this.dtTrigger.unsubscribe();
+  }
+
+
+loadRolData() {
+  this.dataService.getRolData().subscribe((data) => {
+    this.rolData = data.roles;
+    this.rolData.reverse();
+
+
+    // Actualiza DataTables con nuevos datos
+    if (this.dtElement) {
+      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        dtInstance.clear();
+
+        // Verifica que los datos estén en el formato esperado por DataTables
+        const formattedData = this.rolData.map((rol: { id: any; name: any; compensation: any; }) => [rol.id, rol.name, rol.compensation]);
+
+        dtInstance.rows.add(formattedData);
+        dtInstance.draw();
+      });
+    }
+  });
+}
+
+  
+  
+
+  createRol() {
+    if (this.newRolForm.valid) {
+      console.log('Creando rol...', this.newRolForm.value);
+      this.dataService.createRol(this.newRolForm.value).subscribe(
+        () => {
+          console.log('Rol creado con éxito');
+          this.loadRolData();
+          this.newRolForm.reset();
         },
-        {
-          className: 'dt-body', targets:"_all" // Clase CSS a aplicar
+        (error) => {
+          console.error('Error al crear el rol:', error);
         }
-      ],
+      );
+    } else {
+      alert('Debes llenar todos los campos y que sean correctos para la creación del rol');
+      // Resalta visualmente los campos inválidos
+      Object.keys(this.newRolForm.controls).forEach(key => {
+        const control = this.newRolForm.get(key);
+        if (control?.invalid) {
+          control.markAsTouched();
+          control?.setErrors({ 'invalid': true });
+        }
+      });
     }
   }
-  isMenuOpen: boolean = false;
+
+  selectRolForUpdateDelete(id: number) {
+    this.selectedRoleId = id;
+  }
+
+  updateRol() {
+    if (this.selectedRoleId !== null) {
+      this.dataService
+        .updateRol(this.selectedRoleId, this.newRolForm.value)
+        .subscribe(() => {
+          this.loadRolData();
+          this.selectedRoleId = null;
+          this.newRolForm.reset();
+        });
+    }
+  }
+
+  deleteRol() {
+    if (this.selectedRoleId !== null) {
+      this.dataService.deleteRol(this.selectedRoleId).subscribe(() => {
+        this.loadRolData();
+        this.selectedRoleId = null;
+      });
+    }
+  }
 }

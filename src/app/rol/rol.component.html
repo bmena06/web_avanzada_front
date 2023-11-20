@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,15 +13,15 @@
     <div class="body-containers">
         <div class="container">
             <div class="column">
-              <app-menu></app-menu>
+                <app-menu></app-menu>
             </div>
             <div class="column">
-                <div class="logo-column"> 
+                <div class="logo-column">
                     <img class="logo" src="assets/Azul.png" alt="logo">
                 </div>
             </div>
             <div class="column">
-                <div class="user-column"> 
+                <div class="user-column">
                     <div class="column2">
                         <img class="icono" src="assets/image.png" alt="User">
                     </div>
@@ -40,80 +41,17 @@
                     <table datatable [dtOptions]="dtoptions" class="custom-table table table-striped" id="example">
                         <thead>
                             <tr>
-                                <th>ID</th> 
-                                <th>Nombre</th> 
-                                <th>Compensación</th> 
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Compensación</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Dato 1</td>
-                                <td>Dato 2</td>
-                                <td>Dato 3</td> 
+                            <tr *ngFor="let rol of rolData">
+                                <td>{{ rol.id }}</td>
+                                <td>{{ rol.name }}</td>
+                                <td>{{ rol.compensation }}</td>
                             </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-
-                            
-                            <!-- Agregar más filas y datos según tus necesidades -->
                         </tbody>
                     </table>
                 </div>
@@ -121,13 +59,17 @@
             <div class="column4">
                 <div class="modulo-create">
                     <h4 class="create">Crear Rol</h4>
-                    <input class="text2" type="text" id="idRol" name="idRol" placeholder="ID Rol" required>
-                    <input class="textlist" type="text" id="nombre" name="nombre" placeholder="Nombre" required>
-                    <input class="textlist2" type="number" id="compensacion" name="compensacion" placeholder="Compensación" required>
-                    <input type="button" class="button" value="Crear Rol">
+                    <!-- Formulario de creación de roles -->
+                    <form [formGroup]="newRolForm" (ngSubmit)="createRol()">
+                        <input class="text2" type="number" id="idRol" formControlName="id" placeholder="ID Rol" [style.border-color]="newRolForm.get('id')?.invalid && newRolForm.get('id')?.touched ? 'red' : ''" required>
+                        <input class="textlist" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newRolForm.get('name')?.invalid && newRolForm.get('name')?.touched ? 'red' : ''" required>
+                        <input class="textlist2" type="number" id="compensacion" formControlName="compensation" placeholder="Compensación" [style.border-color]="newRolForm.get('compensation')?.invalid && newRolForm.get('compensation')?.touched ? 'red' : ''" required>
+                        <input type="submit" class="button" value="Crear Rol">
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </body>
+
 </html>

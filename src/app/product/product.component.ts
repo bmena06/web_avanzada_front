@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataTableDirective } from 'angular-datatables';
 
 declare var $: any;
 
@@ -10,18 +11,23 @@ declare var $: any;
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class productComponent implements OnInit {
+export class productComponent implements OnInit, OnDestroy {
   productData: any;
   dtoptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
   newProductForm: FormGroup;
   selectedProductId: number | null = null;
 
-  constructor(private dataService: DataService, private fb: FormBuilder) {
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective | any;
+
+  constructor(
+    private dataService: DataService,
+    private fb: FormBuilder
+  ) {
     this.newProductForm = this.fb.group({
-      id: [0, Validators.required],
-      name: ['', Validators.required],
-      price: [0, Validators.required],
+      id: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      price: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
     });
   }
 
@@ -32,39 +38,65 @@ export class productComponent implements OnInit {
         searchPlaceholder: 'Buscar Productos',
       },
       pagingType: 'full_numbers',
-      columnDefs: [
-        {
-          targets: -1,
-        },
-        {
-          className: 'dt-body',
-          targets: '_all',
-        },
-      ],
+      paging: true,
+      pageLength: 9,
     };
 
+    // Inicializa DataTables en el evento ngOnInit
+    this.dtTrigger.next(null);
+
+    // Llama a la carga de datos después de inicializar DataTables
     this.loadProductData();
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
 
   loadProductData() {
     this.dataService.getProductData().subscribe((data) => {
       this.productData = data.productos;
+      this.productData.reverse();
+
+      // Actualiza DataTables con nuevos datos
+      if (this.dtElement) {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          dtInstance.clear();
+          
+          // Verifica que los datos estén en el formato esperado por DataTables
+          const formattedData = this.productData.map((product: { id: any; name: any; price: any; }) => [product.id, product.name, product.price]);
+  
+          dtInstance.rows.add(formattedData);
+          dtInstance.draw();
+        });
+      }
     });
   }
 
   createProduct() {
-    console.log('Creando producto...', this.newProductForm.value);
-    this.dataService.createProduct(this.newProductForm.value).subscribe(
-      () => {
-        console.log('Producto creado con éxito');
-        this.loadProductData();
-        this.newProductForm.reset();
-      },
-      (error) => {
-        console.error('Error al crear el producto:', error);
-        // Puedes mostrar un mensaje de error al usuario si lo deseas
-      }
-    );
+    if (this.newProductForm.valid) {
+      console.log('Creando producto...', this.newProductForm.value);
+      this.dataService.createProduct(this.newProductForm.value).subscribe(
+        () => {
+          console.log('Producto creado con éxito');
+          this.loadProductData();
+          this.newProductForm.reset();
+        },
+        (error) => {
+          console.error('Error al crear el producto:', error);
+        }
+      );
+    } else {
+      alert('Debes llenar todos los campos y que sean correctos para la creación del producto');
+      // Resalta visualmente los campos inválidos
+      Object.keys(this.newProductForm.controls).forEach(key => {
+        const control = this.newProductForm.get(key);
+        if (control?.invalid) {
+          control.markAsTouched();
+          control?.setErrors({ 'invalid': true });
+        }
+      });
+    }
   }
 
   selectProductForUpdateDelete(id: number) {

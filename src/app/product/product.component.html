@@ -38,7 +38,6 @@
           <h4>Productos</h4>
         </div>
         <div class="modulo2 my-4">
-          <!-- Tu contenido principal aquí -->
           <table datatable [dtOptions]="dtoptions" class="custom-table table table-striped" id="example">
             <thead>
               <tr>
@@ -60,11 +59,16 @@
       <div class="column4">
         <div class="modulo-create">
           <h4 class="create">Crear Producto</h4>
-          <!-- Formulario de creación de productos aquí -->
-          <input class="text2" type="text" id="idProducto" name="idProducto" placeholder="ID Producto" required [(ngModel)]="newProductForm.value.id">
-          <input class="textlist" type="text" id="nombre" name="nombre" placeholder="Nombre" required [(ngModel)]="newProductForm.value.name">
-          <input class="textlist2" type="number" id="precio" name="precio" placeholder="Precio" required [(ngModel)]="newProductForm.value.price">
-          <input type="button" class="button" value="Crear Producto" (click)="createProduct()">          
+          <!-- Formulario de creación de productos  -->
+          <form [formGroup]="newProductForm" (ngSubmit)="createProduct()">
+            <input class="text2" type="number" id="idProducto" formControlName="id" placeholder="ID Producto" [style.border-color]="newProductForm.get('id')?.invalid && newProductForm.get('id')?.touched ? 'red' : ''" required>
+          
+            <input class="textlist" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newProductForm.get('name')?.invalid && newProductForm.get('name')?.touched ? 'red' : ''" required>
+          
+            <input class="textlist2" type="number" id="precio" formControlName="price" placeholder="Precio" [style.border-color]="newProductForm.get('price')?.invalid && newProductForm.get('price')?.touched ? 'red' : ''" required>
+          
+            <input type="submit" class="button" value="Crear Producto">
+          </form>         
         </div>
       </div>
     </div>

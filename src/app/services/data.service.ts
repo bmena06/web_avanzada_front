@@ -16,6 +16,8 @@ export class DataService {
 
   constructor(private http: HttpClient) {}
 
+  // Operaciones CRUD para productos
+
   getProductData(): Observable<any> {
     return this.http.get(`${this.apiUrl}/products`);
   }
@@ -31,4 +33,22 @@ export class DataService {
   deleteProduct(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deleteproduct/${id}`, this.httpOptions);
   }
+    // Operaciones CRUD para roles
+  getRolData(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/rols`);
+  }
+
+  createRol(rol: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/newrol`, rol, this.httpOptions);
+  }
+
+  updateRol(id: number, updatedRol: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updaterol/${id}`, updatedRol, this.httpOptions);
+  }
+
+  deleteRol(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleterol/${id}`, this.httpOptions);
+  }
+
 }
+
