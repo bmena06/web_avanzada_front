@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { DataService } from 'src/app/services/data.service';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -45,41 +45,31 @@ export class RolComponent implements OnInit, OnDestroy {
     // Inicializa DataTables en el evento ngOnInit
     this.dtTrigger.next(null);
 
-    
     // Llama a la carga de datos después de inicializar DataTables
     this.loadRolData();
   }
 
-  
   ngOnDestroy(): void {
-    // Utiliza dtTrigger.complete() para completar la suscripción
     this.dtTrigger.unsubscribe();
   }
 
+  loadRolData() {
+    this.dataService.getRolData().subscribe((data) => {
+      // Actualiza DataTables con nuevos datos
+      if (this.dtElement) {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          // Limpia la tabla antes de agregar nuevos datos
+          dtInstance.clear();
 
-loadRolData() {
-  this.dataService.getRolData().subscribe((data) => {
-    this.rolData = data.roles;
-    this.rolData.reverse();
+          // Verifica que los datos estén en el formato esperado por DataTables
+          const formattedData = data.roles.map((rol: { id: any; name: any; compensation: any; }) => [rol.id, rol.name, rol.compensation]);
 
-
-    // Actualiza DataTables con nuevos datos
-    if (this.dtElement) {
-      this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
-        dtInstance.clear();
-
-        // Verifica que los datos estén en el formato esperado por DataTables
-        const formattedData = this.rolData.map((rol: { id: any; name: any; compensation: any; }) => [rol.id, rol.name, rol.compensation]);
-
-        dtInstance.rows.add(formattedData);
-        dtInstance.draw();
-      });
-    }
-  });
-}
-
-  
-  
+          dtInstance.rows.add(formattedData);
+          dtInstance.draw();
+        });
+      }
+    });
+  }
 
   createRol() {
     if (this.newRolForm.valid) {
@@ -87,8 +77,9 @@ loadRolData() {
       this.dataService.createRol(this.newRolForm.value).subscribe(
         () => {
           console.log('Rol creado con éxito');
-          this.loadRolData();
           this.newRolForm.reset();
+          // Mover la carga de datos aquí para garantizar que se actualice después de la creación exitosa
+          this.loadRolData();
         },
         (error) => {
           console.error('Error al crear el rol:', error);
@@ -103,31 +94,6 @@ loadRolData() {
           control.markAsTouched();
           control?.setErrors({ 'invalid': true });
         }
-      });
-    }
-  }
-
-  selectRolForUpdateDelete(id: number) {
-    this.selectedRoleId = id;
-  }
-
-  updateRol() {
-    if (this.selectedRoleId !== null) {
-      this.dataService
-        .updateRol(this.selectedRoleId, this.newRolForm.value)
-        .subscribe(() => {
-          this.loadRolData();
-          this.selectedRoleId = null;
-          this.newRolForm.reset();
-        });
-    }
-  }
-
-  deleteRol() {
-    if (this.selectedRoleId !== null) {
-      this.dataService.deleteRol(this.selectedRoleId).subscribe(() => {
-        this.loadRolData();
-        this.selectedRoleId = null;
       });
     }
   }

@@ -1,5 +1,8 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 import { Subject } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DataTableDirective } from 'angular-datatables';
 
 declare var $: any;
 
@@ -8,30 +11,92 @@ declare var $: any;
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
 })
-export class UserComponent implements OnInit{
+export class UserComponent implements OnInit, OnDestroy {
+  userData: any;
   dtoptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>();
-  sidebarShow: boolean = false;
-  activeLink: string = '';
-  
-  ngOnInit(): void {
+  newUserForm: FormGroup;
 
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective | any;
+
+  constructor(private dataService: DataService, private fb: FormBuilder) {
+    this.newUserForm = this.fb.group({
+      id: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
+      name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      id_rol: ['', [Validators.required]],
+    });
+  }
+
+  ngOnInit(): void {
     this.dtoptions = {
       scrollY: 300,
       language: {
-        searchPlaceholder: "Buscar usuario"
+        searchPlaceholder: 'Buscar Usuarios',
       },
       pagingType: 'full_numbers',
-      columnDefs: [
-        {
-          targets: -1, // Índice de la última columna
+      paging: true,
+      pageLength: 9,
+    };
+
+    // Inicializa DataTables en el evento ngOnInit
+    this.dtTrigger.next(null);
+
+    // Llama a la carga de datos después de inicializar DataTables
+    this.loadUserData();
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
+
+  loadUserData() {
+    this.dataService.getUsersData().subscribe(data => {
+      // Actualiza DataTables con nuevos datos
+      if (this.dtElement) {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          // Limpia la tabla antes de agregar nuevos datos
+          dtInstance.clear();
+  
+          // Verifica que los datos estén en el formato esperado por DataTables
+          const formattedData = data.usuarios.map((user: { id: any; name: any; email: any; password: any; id_rol: any }) => [user.id, user.name, user.email, user.password, user.id_rol]);
+  
+          dtInstance.rows.add(formattedData);
+          dtInstance.draw();
+        });
+      }
+    });
+  }
+  
+  
+  
+  
+
+  createUser() {
+    if (this.newUserForm.valid) {
+      console.log('Creando usuario...', this.newUserForm.value);
+      this.dataService.createUserData(this.newUserForm.value).subscribe(
+        () => {
+          console.log('Usuario creado con éxito');
+          this.newUserForm.reset();
+          // Mover la carga de datos aquí para garantizar que se actualice después de la creación exitosa
+          this.loadUserData();
         },
-        {
-          className: 'dt-body', targets:"_all" // Clase CSS a aplicar
+        (error) => {
+          console.error('Error al crear el usuario:', error);
         }
-      ],
+      );
+    } else {
+      alert('Debes llenar todos los campos y que sean correctos para la creación del usuario');
+      // Resalta visualmente los campos inválidos
+      Object.keys(this.newUserForm.controls).forEach(key => {
+        const control = this.newUserForm.get(key);
+        if (control?.invalid) {
+          control.markAsTouched();
+          control?.setErrors({ 'invalid': true });
+        }
+      });
     }
   }
-  isMenuOpen: boolean = false;
 }
-

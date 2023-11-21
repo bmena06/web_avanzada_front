@@ -48,100 +48,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Dato 1</td>
-                                <td>Dato 2</td>
-                                <td>Dato 3</td>
-                                <td>Dato 4</td>
-                                <td>Dato 5</td> 
+                            <tr *ngFor="let user of userData">
+                                <td>{{ user.id }}</td>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.password }}</td>
+                                <td>{{ user.id_rol }}</td>
                             </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                              <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                              <td>Dato 4</td>
-                                <td>Dato 5</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                              <td>Dato 4</td>
-                                <td>Dato 5</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-
-                            
-                            <!-- Agregar más filas y datos según tus necesidades -->
                         </tbody>
                     </table>
                 </div>
@@ -149,12 +62,14 @@
             <div class="column4">
                 <div class="modulo-create">
                     <h4 class="create">Crear Usuario</h4>
-                    <input class="text2" type="text" id="idUsuario" name="idUsuario" placeholder="ID Usuario" required>
-                    <input class="textlist" type="text" id="nombre" name="nombre" placeholder="Nombre" required>
-                    <input class="textlist2" type="email" id="email" name="email" placeholder="Correo" required>
-                    <input class="textlist3" type="password" id="password" name="password" placeholder="Contraseña" required>
-                    <input class="textlist4" type="text" id="rol" name="rol" placeholder="Rol" required>
-                    <input type="button" class="button" value="Crear Usuario">
+                    <form [formGroup]="newUserForm" (ngSubmit)="createUser()">
+                        <input class="text2" type="number" id="idUsuario" formControlName="id" placeholder="ID Usuario" [style.border-color]="newUserForm.get('id')?.invalid && newUserForm.get('id')?.touched ? 'red' : ''" required>
+                        <input class="textlist" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newUserForm.get('name')?.invalid && newUserForm.get('name')?.touched ? 'red' : ''" required>
+                        <input class="textlist2" type="email" id="email" formControlName="email" placeholder="Correo" [style.border-color]="newUserForm.get('email')?.invalid && newUserForm.get('email')?.touched ? 'red' : ''" required>
+                        <input class="textlist3" type="password" id="password" formControlName="password" placeholder="Contraseña" [style.border-color]="newUserForm.get('password')?.invalid && newUserForm.get('password')?.touched ? 'red' : ''" required>
+                        <input class="textlist4" type="text" id="rol" formControlName="id_rol" placeholder="Rol" [style.border-color]="newUserForm.get('id_rol')?.invalid && newUserForm.get('id_rol')?.touched ? 'red' : ''" required>
+                        <input type="submit" class="button" value="Crear Usuario">
+                    </form>
                 </div>
             </div>
         </div>

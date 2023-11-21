@@ -6,6 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class DataService {
+  deleteUser(selectedUserId: number) {
+    throw new Error('Method not implemented.');
+  }
+  updateUser(selectedUserId: number, value: any) {
+    throw new Error('Method not implemented.');
+  }
   private apiUrl = 'http://localhost:5000/api';
 
   private httpOptions = {
@@ -33,7 +39,9 @@ export class DataService {
   deleteProduct(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deleteproduct/${id}`, this.httpOptions);
   }
-    // Operaciones CRUD para roles
+
+  // Operaciones CRUD para roles
+
   getRolData(): Observable<any> {
     return this.http.get(`${this.apiUrl}/rols`);
   }
@@ -50,5 +58,21 @@ export class DataService {
     return this.http.delete(`${this.apiUrl}/deleterol/${id}`, this.httpOptions);
   }
 
-}
+  // Operaciones CRUD para usuarios
 
+  getUsersData(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/users`);
+  }
+
+  createUserData(user: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/newuser`, user, this.httpOptions);
+  }
+
+  updateUserData(id: number, updatedUser: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/updateuser/${id}`, updatedUser, this.httpOptions);
+  }
+
+  deleteUserData(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/deleteuser/${id}`, this.httpOptions);
+  }
+}
