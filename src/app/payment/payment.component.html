@@ -46,74 +46,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Dato 1</td>
-                                <td>Dato 2</td>
-                                <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                            </tr>
-
-                            
-                            <!-- Agregar más filas y datos según tus necesidades -->
+                          <tr *ngFor="let payment of paymentData">
+                            <td>{{ payment.id }}</td>
+                            <td>{{ payment.usuario }}</td>
+                            <td>{{ payment.total }}</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>

@@ -57,16 +57,14 @@ export class PackageComponent implements OnInit, OnDestroy {
 
   loadPackageData() {
     this.dataService.getPackageData().subscribe((data) => {
-      this.packageData = data.packages;  // Ajuste aquí
-      this.packageData.reverse();
-
       // Actualiza DataTables con nuevos datos
       if (this.dtElement) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          // Limpia la tabla antes de agregar nuevos datos
           dtInstance.clear();
           
           // Verifica que los datos estén en el formato esperado por DataTables
-          const formattedData = this.packageData.map((pkg: { id: any; date: any; active: any; amount: any; user_name: any}) => [pkg.id, pkg.date, pkg.active, pkg.amount, pkg.user_name]);
+          const formattedData = data.packages.map((pkg: { id: any; date: any; active: any; amount: any; user_name: any}) => [pkg.id, pkg.date, pkg.active, pkg.amount, pkg.user_name]);
   
           dtInstance.rows.add(formattedData);
           dtInstance.draw();
@@ -82,8 +80,9 @@ export class PackageComponent implements OnInit, OnDestroy {
       this.dataService.createPackage(this.newPackageForm.value).subscribe(
         () => {
           console.log('Paquete creado con éxito');
-          this.loadPackageData();
           this.newPackageForm.reset();
+          // Mover la carga de datos aquí para garantizar que se actualice después de la creación exitosa
+          this.loadPackageData();
         },
         (error) => {
           console.error('Error al crear el paquete:', error);

@@ -118,7 +118,26 @@ export class DataService {
   deletePackage(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deletepackage/${id}`, this.httpOptions);
   }
-}
 
+
+    // Operaciones CRUD para pagos
+
+    getPaymentData(): Observable<any> {
+      return this.http.get(`${this.apiUrl}/payments`, this.httpOptions);
+    }
+  
+    createPaymentData(payment: any): Observable<any> {
+      return this.http.post(`${this.apiUrl}/newpayment`, payment, this.httpOptions);
+    }
+  
+    updatePaymentData(id: number, updatedPayment: any): Observable<any> {
+      return this.http.put(`${this.apiUrl}/updatepayment/${id}`, updatedPayment, this.httpOptions);
+    }
+  
+    deletePaymentData(id: number): Observable<any> {
+      return this.http.delete(`${this.apiUrl}/deletepayment/${id}`, this.httpOptions);
+    }
+  
+}
 
 

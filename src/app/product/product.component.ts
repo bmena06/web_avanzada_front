@@ -55,16 +55,14 @@ export class productComponent implements OnInit, OnDestroy {
 
   loadProductData() {
     this.dataService.getProductData().subscribe((data) => {
-      this.productData = data.productos;
-      this.productData.reverse();
-
       // Actualiza DataTables con nuevos datos
       if (this.dtElement) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          // Limpia la tabla antes de agregar nuevos datos
           dtInstance.clear();
           
           // Verifica que los datos estén en el formato esperado por DataTables
-          const formattedData = this.productData.map((product: { id: any; name: any; price: any; }) => [product.id, product.name, product.price]);
+          const formattedData = data.productos.map((product: { id: any; name: any; price: any; }) => [product.id, product.name, product.price]);
   
           dtInstance.rows.add(formattedData);
           dtInstance.draw();
@@ -79,8 +77,9 @@ export class productComponent implements OnInit, OnDestroy {
       this.dataService.createProduct(this.newProductForm.value).subscribe(
         () => {
           console.log('Producto creado con éxito');
-          this.loadProductData();
           this.newProductForm.reset();
+          // Mover la carga de datos aquí para garantizar que se actualice después de la creación exitosa
+          this.loadProductData();
         },
         (error) => {
           console.error('Error al crear el producto:', error);
