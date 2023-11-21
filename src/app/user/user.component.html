@@ -53,7 +53,7 @@
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.password }}</td>
-                                <td>{{ user.id_rol }}</td>
+                                <td>{{ user.rol_name}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -63,11 +63,10 @@
                 <div class="modulo-create">
                     <h4 class="create">Crear Usuario</h4>
                     <form [formGroup]="newUserForm" (ngSubmit)="createUser()">
-                        <input class="text2" type="number" id="idUsuario" formControlName="id" placeholder="ID Usuario" [style.border-color]="newUserForm.get('id')?.invalid && newUserForm.get('id')?.touched ? 'red' : ''" required>
-                        <input class="textlist" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newUserForm.get('name')?.invalid && newUserForm.get('name')?.touched ? 'red' : ''" required>
+                        <input class="text2" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newUserForm.get('name')?.invalid && newUserForm.get('name')?.touched ? 'red' : ''" required>
                         <input class="textlist2" type="email" id="email" formControlName="email" placeholder="Correo" [style.border-color]="newUserForm.get('email')?.invalid && newUserForm.get('email')?.touched ? 'red' : ''" required>
                         <input class="textlist3" type="password" id="password" formControlName="password" placeholder="Contraseña" [style.border-color]="newUserForm.get('password')?.invalid && newUserForm.get('password')?.touched ? 'red' : ''" required>
-                        <input class="textlist4" type="text" id="rol" formControlName="id_rol" placeholder="Rol" [style.border-color]="newUserForm.get('id_rol')?.invalid && newUserForm.get('id_rol')?.touched ? 'red' : ''" required>
+                        <input class="textlist4" type="text" id="rol" formControlName="rol_name" placeholder="Rol" [style.border-color]="newUserForm.get('rol_name')?.invalid && newUserForm.get('rol_name')?.touched ? 'red' : ''" required>
                         <input type="submit" class="button" value="Crear Usuario">
                     </form>
                 </div>

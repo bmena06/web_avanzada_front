@@ -25,7 +25,7 @@ export class UserComponent implements OnInit, OnDestroy {
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      id_rol: ['', [Validators.required]],
+      rol_name: ['', [Validators.required]],
     });
   }
 
@@ -60,7 +60,7 @@ export class UserComponent implements OnInit, OnDestroy {
           dtInstance.clear();
   
           // Verifica que los datos estén en el formato esperado por DataTables
-          const formattedData = data.usuarios.map((user: { id: any; name: any; email: any; password: any; id_rol: any }) => [user.id, user.name, user.email, user.password, user.id_rol]);
+          const formattedData = data.usuarios.map((user: { id: any; name: any; email: any; password: any; rol_name: any }) => [user.id, user.name, user.email, user.password, user.rol_name]);
   
           dtInstance.rows.add(formattedData);
           dtInstance.draw();

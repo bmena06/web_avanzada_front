@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -11,28 +13,34 @@
     <title>Formulario Login y Registro de Usuarios</title>
 </head>
 <body>
-   <!-- Formularios -->
-    <div class="contenedor-formularios">
+    <!-- Asegúrate de tener FormsModule importado en tu módulo -->
+    <form (ngSubmit)="login()" #loginForm="ngForm">
         <!-- Contenido de los Formularios -->
-        <div class="contenido-tab">
-            <!-- Iniciar Sesion -->
-            <div id="iniciar-sesion">
-                <div class="contenedor-input">
-                    <img src="assets/Logoblanco.png" alt="LOGO">
-                    <h1>Usuario</h1>
-                    <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu Usuario..." required>
-                </div>
+        <div class="contenedor-formularios">
+            <!-- Contenido de los Formularios -->
+            <div class="contenido-tab">
+                <!-- Iniciar Sesion -->
+                <div id="iniciar-sesion">
+                    <div class="contenedor-input">
+                        <img src="assets/Logoblanco.png" alt="LOGO">
+                        <h1>Usuario</h1>
+                        <!-- Agrega ngModel al input para el nombre de usuario -->
+                        <input type="text" [(ngModel)]="credentials.name" name="usuario" placeholder="Ingresa tu Usuario..." required>
+                    </div>
                     
-                <div class="contenedor-input">
-                    <h1>Contraseña</h1>
-                    <input type="password" id="contrasena" name="contrasena" placeholder="Ingresa tu Contraseña..." required>
+                    <div class="contenedor-input">
+                        <h1>Contraseña</h1>
+                        <!-- Agrega ngModel al input para la contraseña -->
+                        <input type="password" [(ngModel)]="credentials.password" name="contrasena" placeholder="Ingresa tu Contraseña..." required>
+                    </div>
+                    <!-- Cambia a type="submit" para que el formulario se envíe al hacer clic en el botón -->
+                    <input type="submit" class="button button-block" value="Entrar">
                 </div>
-                <input type="button" class="button button-block" routerLink="/home" value="Entrar">
             </div>
         </div>
-    </div>
+    </form>
 
-   <script src="js/jquery.js"></script>
-   <script src="js/main.js"></script>
-
+    <script src="js/jquery.js"></script>
+    <script src="js/main.js"></script>
 </body>
+</html>

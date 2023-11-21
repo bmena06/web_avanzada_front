@@ -48,100 +48,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Dato 1</td>
-                                <td>Dato 2</td>
-                                <td>Dato 3</td>
-                                <td>Dato 4</td>
-                                <td>Dato 5</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                              <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                              <td>Dato 4</td>
-                                <td>Dato 5</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td> 
-                              <td>Dato 4</td>
-                                <td>Dato 5</td> 
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-                            <tr>
-                              <td>Dato 1</td>
-                              <td>Dato 2</td>
-                              <td>Dato 3</td>
-                              <td>Dato 4</td>
-                                <td>Dato 5</td>  
-                            </tr>
-
-                            
-                            <!-- Agregar más filas y datos según tus necesidades -->
+                          <tr *ngFor="let package of packageData">
+                            <td>{{ package.id }}</td>
+                            <td>{{ package.date }}</td>
+                            <td>{{ package.active }}</td>
+                            <td>{{ package.amount }}</td>
+                            <td>{{ package.user_name }}</td>
+                        </tr>                            
                         </tbody>
                     </table>
                 </div>

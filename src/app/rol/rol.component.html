@@ -61,8 +61,7 @@
                     <h4 class="create">Crear Rol</h4>
                     <!-- Formulario de creación de roles -->
                     <form [formGroup]="newRolForm" (ngSubmit)="createRol()">
-                        <input class="text2" type="number" id="idRol" formControlName="id" placeholder="ID Rol" [style.border-color]="newRolForm.get('id')?.invalid && newRolForm.get('id')?.touched ? 'red' : ''" required>
-                        <input class="textlist" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newRolForm.get('name')?.invalid && newRolForm.get('name')?.touched ? 'red' : ''" required>
+                        <input class="text2" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newRolForm.get('name')?.invalid && newRolForm.get('name')?.touched ? 'red' : ''" required>
                         <input class="textlist2" type="number" id="compensacion" formControlName="compensation" placeholder="Compensación" [style.border-color]="newRolForm.get('compensation')?.invalid && newRolForm.get('compensation')?.touched ? 'red' : ''" required>
                         <input type="submit" class="button" value="Crear Rol">
                     </form>
