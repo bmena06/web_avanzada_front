@@ -14,6 +14,7 @@ import { UserComponent } from './user/user.component';
 import { PackageComponent } from './package/package.component';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
+import { SesionComponent } from './sesion/sesion.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     PaymentComponent,
     UserComponent,
     PackageComponent,
-    MenuComponent
+    MenuComponent,
+    SesionComponent
   ],
   imports: [
     BrowserModule,

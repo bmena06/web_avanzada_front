@@ -25,7 +25,6 @@ export class PackageComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {
     this.newPackageForm = this.fb.group({
-      id: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       date: [null, Validators.required],
       active: [null, Validators.required],
       amount: [null, Validators.required],

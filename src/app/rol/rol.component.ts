@@ -25,7 +25,6 @@ export class RolComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {
     this.newRolForm = this.fb.group({
-      id: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       compensation: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
     });

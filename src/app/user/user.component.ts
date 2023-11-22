@@ -21,7 +21,6 @@ export class UserComponent implements OnInit, OnDestroy {
 
   constructor(private dataService: DataService, private fb: FormBuilder) {
     this.newUserForm = this.fb.group({
-      id: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],

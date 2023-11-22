@@ -25,7 +25,6 @@ export class productComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {
     this.newProductForm = this.fb.group({
-      id: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
       price: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
     });
@@ -39,7 +38,7 @@ export class productComponent implements OnInit, OnDestroy {
       },
       pagingType: 'full_numbers',
       paging: true,
-      pageLength: 9,
+      pageLength: 10,
     };
 
     // Inicializa DataTables en el evento ngOnInit

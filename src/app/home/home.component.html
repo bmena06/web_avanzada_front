@@ -25,8 +25,7 @@
                         <img class="icono" src="assets/image.png" alt="User">
                     </div>
                     <div class="column2">
-                        <h1>Usuario</h1>
-                        <h1>Rol</h1>
+                        <app-sesion></app-sesion>
                     </div>
                 </div>
             </div>
@@ -40,16 +39,15 @@
                     <table datatable [dtOptions]="dtoptions" class="custom-table table table-striped" id="example">
                         <thead>
                           <tr>
-                            <th>Columna 1</th>
-                            <th>Columna 2</th>
+                            <th>ID</th>
+                            <th>ID-Paquete</th>
+                            <th>Fecha</th>
+                            <th>Producto</th>
+                            <th>Usuario</th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr>
-                            <td>Dato 1</td>
-                            <td>Dato 2</td>
-                            <!-- ... Agrega los demás datos según tus datos ... -->
-                          </tr>
+
                         </tbody>
                     </table>
                 </div>

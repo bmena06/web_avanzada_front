@@ -18,7 +18,6 @@ export class LoginComponent {
 
   login() {
     console.log('Credenciales enviadas:', this.credentials);
-
     // Llama al servicio de autenticación
     this.authService.login(this.credentials)
       .pipe(
