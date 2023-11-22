@@ -1,6 +1,8 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { DataService } from 'src/app/services/data.service';
 import { Subject } from 'rxjs';
-import { DataService } from '../produccion.service';
+import { DataTableDirective } from 'angular-datatables';
+
 declare var $: any;
 
 @Component({
@@ -8,28 +10,55 @@ declare var $: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
+  productions: any[] = [];
   dtoptions: DataTables.Settings = {};
-  dtTrigger: Subject<any> = new Subject<any>();
-  sidebarShow: boolean = false;
-  activeLink: string = '';
-  ngOnInit(): void {
+  dtTrigger: Subject<any> = new Subject<any>;
 
+  @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective | any;
+
+  constructor(private dataService: DataService) {}
+
+  ngOnInit(): void {
     this.dtoptions = {
       scrollY: 300,
       language: {
-        searchPlaceholder: "Buscar Producciones"
+        searchPlaceholder: 'Buscar Producciones',
       },
       pagingType: 'full_numbers',
-      columnDefs: [
-        {
-          targets: -1, // Índice de la última columna
-        },
-        {
-          className: 'dt-body', targets:"_all" // Clase CSS a aplicar
-        }
-      ],
-    }
+      paging: true,
+      pageLength: 9,
+    };
+    // Inicializa DataTables en el evento ngOnInit
+    this.dtTrigger.next(null);
   }
-  isMenuOpen: boolean = false;
+
+  ngAfterViewInit(): void {
+    this.loadProductions();
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
+
+  loadProductions() {
+    this.dataService.getProductions().subscribe(data => {
+      // Actualiza DataTables con nuevos datos
+      if (this.dtElement) {
+        this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+          // Limpia la tabla antes de agregar nuevos datos
+          dtInstance.clear();
+  
+          // Verifica que los datos estén en el formato esperado por DataTables
+          const formattedData = data.producciones.map((production: { id: any; package_id: any; date: any; product_name: any; user_name: any }) => [production.id, production.package_id, production.date, production.product_name, production.user_name]);
+  
+          dtInstance.rows.add(formattedData);
+          dtInstance.draw();
+        });
+      }
+    });
+  }
+  
+  
+
 }

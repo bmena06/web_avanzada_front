@@ -47,6 +47,12 @@
                           </tr>
                         </thead>
                         <tbody>
+                            <tr *ngFor="let production of productions">
+                                <td>{{ production.id }}</td>
+                                <td>{{ production.package_id }}</td>
+                                <td>{{ production.date }}</td>
+                                <td>{{ production.product_name }}</td>
+                                <td>{{ production.user_name }}</td>
 
                         </tbody>
                     </table>

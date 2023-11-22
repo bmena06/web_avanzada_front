@@ -144,6 +144,12 @@ export class DataService {
   deletePaymentData(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/deletepayment/${id}`, this.getHttpOptions());
   }
+
+
+  //PRODUCCIONES
+  getProductions(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/productions`, this.getHttpOptions());
+  }
   
 }
 
