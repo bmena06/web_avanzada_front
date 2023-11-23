@@ -62,6 +62,12 @@ export class DataService {
     );
   }
 
+  logout(): void {
+    // Limpia el local storage al cerrar sesión
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
+    localStorage.removeItem('user_id');
+  }
   // Operaciones para productos
 
   // Método para obtener datos de productos

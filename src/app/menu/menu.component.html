@@ -12,7 +12,7 @@
         <a href="#" [class.active]="activeLink === 'products'" (click)="activeLink = 'products'" routerLink="/product">Productos</a>
         <a href="#" [class.active]="activeLink === 'roles'" (click)="activeLink = 'roles'" routerLink="/rol">Roles</a>
         <a href="#" [class.active]="activeLink === 'users'" (click)="activeLink = 'users'" routerLink="/user">Usuarios</a>
-        <button class="logout-button">Cerrar Sesión</button>
+        <button class="logout-button" (click)="logout()">Cerrar Sesión</button>
       </div>
     </div>
 </div>

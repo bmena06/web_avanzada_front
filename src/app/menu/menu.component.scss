@@ -86,7 +86,9 @@ $form-bg: #001696;
     color: white;
     border: none;
     padding: 15px 20px; // Aumentar el padding para hacer el botón más grande
-    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: bold;
     transition: background-color 0.3s;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
