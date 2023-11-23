@@ -10,6 +10,7 @@ import { tap } from 'rxjs/operators';
 export class DataService {
   // URL base de la API
   private apiUrl = 'http://localhost:5000/api';
+  private tokenKey = 'token';
 
   // Constructor que inyecta el servicio HttpClient
   constructor(private http: HttpClient) {}
@@ -69,6 +70,11 @@ export class DataService {
     localStorage.removeItem('user_id');
   }
   // Operaciones para productos
+
+  isLoggedIn(): boolean {
+    // Verifica si el usuario está autenticado comprobando si hay un token en el localStorage
+    return !!localStorage.getItem(this.tokenKey);
+  }
 
   // Método para obtener datos de productos
   getProductData(): Observable<any> {

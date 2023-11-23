@@ -15,6 +15,7 @@ import { PackageComponent } from './package/package.component';
 import { MenuComponent } from './menu/menu.component';
 import { FormsModule } from '@angular/forms';
 import { SesionComponent } from './sesion/sesion.component';
+import { AuthGuard } from './auth.guard';
 
 
 @NgModule({
@@ -38,7 +39,7 @@ import { SesionComponent } from './sesion/sesion.component';
     DataTablesModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

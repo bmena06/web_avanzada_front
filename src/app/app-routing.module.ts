@@ -7,16 +7,17 @@ import {RolComponent} from './rol/rol.component';
 import {PaymentComponent} from './payment/payment.component';
 import {UserComponent} from './user/user.component';
 import {PackageComponent} from './package/package.component';
+import { AuthGuard } from './auth.guard';
 
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'product', component: productComponent },
-  { path: 'rol', component: RolComponent},
-  { path: 'payment', component: PaymentComponent},
-  { path: 'user', component:  UserComponent},
-  { path: 'package', component: PackageComponent}
+  { path: '', component: LoginComponent},
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'product', component: productComponent, canActivate: [AuthGuard]},
+  { path: 'rol', component: RolComponent, canActivate: [AuthGuard]},
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard]},
+  { path: 'user', component:  UserComponent, canActivate: [AuthGuard]},
+  { path: 'package', component: PackageComponent, canActivate: [AuthGuard]}
 
   // Otras rutas pueden ir aquí
 ];
