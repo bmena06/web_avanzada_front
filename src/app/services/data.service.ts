@@ -3,15 +3,18 @@ import { HttpClient, HttpHeaders, HttpEvent, HttpResponse } from '@angular/commo
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+// Servicio Angular para gestionar la comunicación con la API
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
+  // URL base de la API
   private apiUrl = 'http://localhost:5000/api';
-  private userId = 'userid';
 
+  // Constructor que inyecta el servicio HttpClient
   constructor(private http: HttpClient) {}
 
+  // Método privado para obtener las opciones de HTTP con el token de autorización
   private getHttpOptions(): any {
     // Recuperar el token del localStorage
     const token: string | null = localStorage.getItem('token');
@@ -26,17 +29,18 @@ export class DataService {
     return httpOptions;
   }
 
+  // Método privado para almacenar datos del usuario en el localStorage
   private saveUserDataToLocalStorage(userData: any): void {
     localStorage.setItem('userData', JSON.stringify(userData));
   }
 
+  // Método para obtener datos del usuario desde el localStorage
   getUserDataFromLocalStorage(): any {
-  const userDataString = localStorage.getItem('userData');
-  return userDataString ? JSON.parse(userDataString) : null;
+    const userDataString = localStorage.getItem('userData');
+    return userDataString ? JSON.parse(userDataString) : null;
   }
 
-  
-
+  // Método para realizar la autenticación del usuario
   login(credentials: { name: string; password: string }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials, this.getHttpOptions()).pipe(
       tap((event: HttpEvent<any>) => {
@@ -51,114 +55,82 @@ export class DataService {
             const userData = event.body?.user;
             if (userData) {
               this.saveUserDataToLocalStorage(userData);
-              this.userId = userData.id;            }
+            }
           }
         }
       })
     );
   }
 
+  // Operaciones para productos
+
+  // Método para obtener datos de productos
   getProductData(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/products`, this.getHttpOptions(), );
+    return this.http.get(`${this.apiUrl}/products`, this.getHttpOptions());
   }
 
+  // Método para crear un nuevo producto
   createProduct(product: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/newproduct`, product, this.getHttpOptions());
   }
 
-  updateProduct(id: number, updatedProduct: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/updateproduct/${id}`, updatedProduct, this.getHttpOptions());
-  }
+  // Operaciones para roles
 
-  deleteProduct(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/deleteproduct/${id}`, this.getHttpOptions());
-  }
-
-  // Operaciones CRUD para roles
-
+  // Método para obtener datos de roles
   getRolData(): Observable<any> {
     return this.http.get(`${this.apiUrl}/rols`, this.getHttpOptions());
   }
 
+  // Método para crear un nuevo rol
   createRol(rol: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/newrol`, rol, this.getHttpOptions());
   }
 
-  updateRol(id: number, updatedRol: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/updaterol/${id}`, updatedRol, this.getHttpOptions());
-  }
+  // Operaciones para usuarios
 
-  deleteRol(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/deleterol/${id}`, this.getHttpOptions());
-  }
-
-  // Operaciones CRUD para usuarios
-
+  // Método para obtener datos de usuarios
   getUsersData(): Observable<any> {
     return this.http.get(`${this.apiUrl}/users`, this.getHttpOptions());
   }
 
+  // Método para crear un nuevo usuario
   createUserData(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/newuser`, user, this.getHttpOptions());
   }
 
-  updateUserData(id: number, updatedUser: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/updateuser/${id}`, updatedUser, this.getHttpOptions());
-  }
+  // Operaciones para paquetes
 
-  deleteUserData(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/deleteuser/${id}`, this.getHttpOptions());
-  }
-
-  // Operaciones CRUD para paquetes
-
+  // Método para obtener datos de paquetes
   getPackageData(): Observable<any> {
     return this.http.get(`${this.apiUrl}/packages`, this.getHttpOptions());
   }
 
+  // Método para crear un nuevo paquete
   createPackage(pkg: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/newpackage`, pkg, this.getHttpOptions());
   }
 
-  updatePackage(id: number, updatedPackage: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/updatepackage/${id}`, updatedPackage, this.getHttpOptions());
-  }
+  // Operaciones para pagos
 
-  deletePackage(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/deletepackage/${id}`, this.getHttpOptions());
-  }
-
-
-    // Operaciones CRUD para pagos
-
+  // Método para obtener datos de pagos
   getPaymentData(): Observable<any> {
     return this.http.get(`${this.apiUrl}/payments`, this.getHttpOptions());
   }
-  
+
+  // Método para crear un nuevo pago
   createPaymentData(payment: any): Observable<any> {
-      return this.http.post(`${this.apiUrl}/newpayment`, payment, this.getHttpOptions());
-  }
-  
-  updatePaymentData(id: number, updatedPayment: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/updatepayment/${id}`, updatedPayment, this.getHttpOptions());
-  }
-  
-  deletePaymentData(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/deletepayment/${id}`, this.getHttpOptions());
+    return this.http.post(`${this.apiUrl}/newpayment`, payment, this.getHttpOptions());
   }
 
+  // Operaciones para producciones
 
-  //PRODUCCIONES
+  // Método para obtener datos de producciones
   getProductions(): Observable<any> {
     return this.http.get(`${this.apiUrl}/productions`, this.getHttpOptions());
   }
-  
 
-
+  // Método para crear una nueva producción
   createProduction(production: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/newproduction`, production, this.getHttpOptions());
   }
-
 }
-
-

@@ -4,28 +4,39 @@ import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataTableDirective } from 'angular-datatables';
 
-declare var $: any;
-
+// Componente Angular para gestionar pagos
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent implements OnInit, OnDestroy {
+  // Propiedad para almacenar datos de pagos
   paymentData: any;
+
+  // Configuración para DataTables
   dtoptions: DataTables.Settings = {};
+
+  // Observable para notificar cambios en datos a DataTables
   dtTrigger: Subject<any> = new Subject<any>();
+
+  // Formulario reactivo para la creación de nuevos pagos
   newPaymentForm: FormGroup;
 
+  // Elemento de DataTables obtenido mediante ViewChild
   @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective | any;
 
+  // Constructor del componente
   constructor(private dataService: DataService, private fb: FormBuilder) {
+    // Inicializa el formulario reactivo con validaciones
     this.newPaymentForm = this.fb.group({
       id: [null, [Validators.required, Validators.pattern(/^[0-9]+$/)]],
     });
   }
 
+  // Método ejecutado al inicializar el componente
   ngOnInit(): void {
+    // Configuración de DataTables
     this.dtoptions = {
       scrollY: 300,
       language: {
@@ -36,60 +47,73 @@ export class PaymentComponent implements OnInit, OnDestroy {
       pageLength: 9,
     };
 
-    // Inicializa DataTables en el evento ngOnInit
+    // Inicializa DataTables y carga datos de pagos
     this.dtTrigger.next(null);
-
-    // Llama a la carga de datos después de inicializar DataTables
     this.loadPaymentData();
   }
 
+  // Método ejecutado al destruir el componente
   ngOnDestroy(): void {
+    // Cancela la suscripción a eventos de DataTables
     this.dtTrigger.unsubscribe();
   }
 
+  // Carga los datos de pagos desde el servicio
   loadPaymentData() {
     this.dataService.getPaymentData().subscribe((data) => {
       if (data && data.payments && Array.isArray(data.payments)) {
+        // Actualiza DataTables con nuevos datos
         if (this.dtElement) {
           this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {
+            // Limpia la tabla antes de agregar nuevos datos
             dtInstance.clear();
   
+            // Verifica y formatea los datos para DataTables
             const formattedData = data.payments.map((payment: any) => [
               payment && payment.id ? payment.id : '',
               payment && payment.user_name ? payment.user_name : '',
               payment && payment.total_payment ? payment.total_payment : '',
             ]);
   
+            // Agrega los datos formateados y dibuja la tabla
             dtInstance.rows.add(formattedData);
             dtInstance.draw();
           });
         }
       } else {
+        // Imprime en consola un mensaje de error si los datos no tienen el formato esperado
         console.error('Los datos de pagos, la propiedad "payments" o no es un array:', data);
       }
     });
   }
+
+  // Método para crear un nuevo pago
   createPayment() {
     if (this.newPaymentForm.valid) {
+      // Imprime en consola el inicio del proceso de creación
       console.log('Creando pago...', this.newPaymentForm.value);
-  
+      
       // Verificar la existencia de propiedades antes de acceder a ellas
       const paymentId = this.newPaymentForm.value.id ? this.newPaymentForm.value.id : '';
   
+      // Llama al servicio para crear el pago
       this.dataService.createPaymentData({ id: paymentId }).subscribe(
         () => {
+          // Imprime en consola el éxito en la creación
           console.log('Pago creado con éxito');
+          
+          // Reinicia el formulario y recarga los datos de pagos
           this.newPaymentForm.reset();
-          // Mover la carga de datos aquí para garantizar que se actualice después de la creación exitosa
           this.loadPaymentData();
         },
         (error) => {
+          // Imprime en consola en caso de error en la creación
           console.error('Error al crear el pago:', error);
         }
       );
     } else {
+      // Alerta si el formulario no es válido y resalta visualmente los campos inválidos
       alert('Debes llenar todos los campos y que sean correctos para la creación del pago');
-      // Resalta visualmente los campos inválidos
       Object.keys(this.newPaymentForm.controls).forEach((key) => {
         const control = this.newPaymentForm.get(key);
         if (control?.invalid) {

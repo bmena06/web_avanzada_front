@@ -4,25 +4,33 @@ import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataTableDirective } from 'angular-datatables';
 
-declare var $: any;
-
+// Componente Angular para gestionar productos
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
 export class productComponent implements OnInit, OnDestroy {
+    // Propiedad para almacenar datos de productos
   productData: any;
+    // Configuración para DataTables
   dtoptions: DataTables.Settings = {};
+    // Observable para notificar cambios en datos a DataTables
   dtTrigger: Subject<any> = new Subject<any>();
+    // Formulario reactivo para la creación de nuevos productos
   newProductForm: FormGroup;
+    // Identificador del producto seleccionado (si hay alguno)
   selectedProductId: number | null = null;
 
+  // Elemento de DataTables obtenido mediante ViewChild
   @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective | any;
 
+
+    // Constructor del componente
   constructor(
     private dataService: DataService,
     private fb: FormBuilder
+        // Inicializa el formulario reactivo con validaciones
   ) {
     this.newProductForm = this.fb.group({
       name: ['', [Validators.required, Validators.pattern(/^[a-zA-Z]+$/)]],
@@ -31,6 +39,7 @@ export class productComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    // Configuración de DataTables
     this.dtoptions = {
       scrollY: 300,
       language: {
@@ -48,10 +57,13 @@ export class productComponent implements OnInit, OnDestroy {
     this.loadProductData();
   }
 
+  // Método ejecutado al destruir el componente
   ngOnDestroy(): void {
+    // Cancela la suscripción a eventos de DataTables
     this.dtTrigger.unsubscribe();
   }
 
+    // Carga los datos de productos desde el servicio
   loadProductData() {
     this.dataService.getProductData().subscribe((data) => {
       // Actualiza DataTables con nuevos datos
@@ -62,27 +74,30 @@ export class productComponent implements OnInit, OnDestroy {
           
           // Verifica que los datos estén en el formato esperado por DataTables
           const formattedData = data.productos.map((product: { id: any; name: any; price: any; }) => [product.id, product.name, product.price]);
-  
+            // Agrega los datos formateados y dibuja la tabla
           dtInstance.rows.add(formattedData);
           dtInstance.draw();
         });
       }
     });
   }
-
+  // Método para crear un nuevo producto
   createProduct() {
     if (this.newProductForm.valid) {
       console.log('Creando producto...', this.newProductForm.value);
+            // Llama al la clase para crear el producto
       this.dataService.createProduct(this.newProductForm.value).subscribe(
         () => {
           console.log('Producto creado con éxito');
+          // Reinicia el formulario 
           this.newProductForm.reset();
-          // Mover la carga de datos aquí para garantizar que se actualice después de la creación exitosa
+          //  carga de datos después de la creación exitosa
           this.loadProductData();
         },
         (error) => {
           console.error('Error al crear el producto:', error);
-  
+
+                    // Muestra una alerta en caso de un error específico
           if (error.status === 400 && error.error?.mensaje) {
             alert(`Error: ${error.error.mensaje}`);
           }
@@ -97,31 +112,6 @@ export class productComponent implements OnInit, OnDestroy {
           control.markAsTouched();
           control?.setErrors({ 'invalid': true });
         }
-      });
-    }
-  }
-
-  selectProductForUpdateDelete(id: number) {
-    this.selectedProductId = id;
-  }
-
-  updateProduct() {
-    if (this.selectedProductId !== null) {
-      this.dataService
-        .updateProduct(this.selectedProductId, this.newProductForm.value)
-        .subscribe(() => {
-          this.loadProductData();
-          this.selectedProductId = null;
-          this.newProductForm.reset();
-        });
-    }
-  }
-
-  deleteProduct() {
-    if (this.selectedProductId !== null) {
-      this.dataService.deleteProduct(this.selectedProductId).subscribe(() => {
-        this.loadProductData();
-        this.selectedProductId = null;
       });
     }
   }
