@@ -26,12 +26,16 @@ export class LoginComponent {
             // Aquí puedes acceder al token en la respuesta
             const token = response.token;
             console.log('Login successful', response);
-
             // Guarda el token en localStorage o donde lo necesites
             if (token) {
               localStorage.setItem('token', token);
+              // Guarda el nombre y el rol en localStorage
+              localStorage.setItem('userName', response.user.name);
+              localStorage.setItem('userRole', response.user.role_name);
+              localStorage.setItem('user_id', response.user.id);
+              console.log(localStorage)
             }
-
+  
             // Redirige al usuario a la ruta '/home' después de un inicio de sesión exitoso
             this.router.navigate(['/home']);
           },
@@ -43,4 +47,4 @@ export class LoginComponent {
       )
       .subscribe(); // Mantén la suscripción aquí si realmente necesitas suscribirte al observable.
   }
-}
+}  

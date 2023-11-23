@@ -82,6 +82,10 @@ export class RolComponent implements OnInit, OnDestroy {
         },
         (error) => {
           console.error('Error al crear el rol:', error);
+  
+          if (error.status === 400 && error.error?.mensaje) {
+            alert(`Error: ${error.error.mensaje}`);
+          }
         }
       );
     } else {
@@ -96,4 +100,5 @@ export class RolComponent implements OnInit, OnDestroy {
       });
     }
   }
+  
 }

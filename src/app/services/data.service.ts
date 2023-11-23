@@ -8,6 +8,7 @@ import { tap } from 'rxjs/operators';
 })
 export class DataService {
   private apiUrl = 'http://localhost:5000/api';
+  private userId = 'userid';
 
   constructor(private http: HttpClient) {}
 
@@ -32,8 +33,9 @@ export class DataService {
   getUserDataFromLocalStorage(): any {
   const userDataString = localStorage.getItem('userData');
   return userDataString ? JSON.parse(userDataString) : null;
-}
+  }
 
+  
 
   login(credentials: { name: string; password: string }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/login`, credentials, this.getHttpOptions()).pipe(
@@ -49,7 +51,7 @@ export class DataService {
             const userData = event.body?.user;
             if (userData) {
               this.saveUserDataToLocalStorage(userData);
-            }
+              this.userId = userData.id;            }
           }
         }
       })
@@ -151,6 +153,12 @@ export class DataService {
     return this.http.get(`${this.apiUrl}/productions`, this.getHttpOptions());
   }
   
+
+
+  createProduction(production: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/newproduction`, production, this.getHttpOptions());
+  }
+
 }
 
 

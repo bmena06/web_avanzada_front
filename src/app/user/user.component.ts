@@ -4,7 +4,6 @@ import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataTableDirective } from 'angular-datatables';
 
-declare var $: any;
 
 @Component({
   selector: 'app-user',

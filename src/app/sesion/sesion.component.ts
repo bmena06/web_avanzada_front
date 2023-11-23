@@ -17,13 +17,14 @@ export class SesionComponent implements OnInit {
   }
 
   private getUserDataFromLocalStorage(): void {
-    const userDataString: string | null = localStorage.getItem('userData');
+    // Accede directamente a las claves correspondientes en el localStorage
+    const userName: string | null = localStorage.getItem('userName');
+    const userRole: string | null = localStorage.getItem('userRole');
 
-    if (userDataString) {
-      const userData = JSON.parse(userDataString);
-      console.log('userData:', userData);
-      this.userName = userData.name;
-      this.roleName = userData.role_name;
+    // Verifica si las claves existen en el localStorage
+    if (userName && userRole) {
+      this.userName = userName;
+      this.roleName = userRole;
     }
   }
 }

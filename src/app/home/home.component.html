@@ -47,12 +47,6 @@
                           </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let production of productions">
-                                <td>{{ production.id }}</td>
-                                <td>{{ production.package_id }}</td>
-                                <td>{{ production.date }}</td>
-                                <td>{{ production.product_name }}</td>
-                                <td>{{ production.user_name }}</td>
 
                         </tbody>
                     </table>
@@ -61,8 +55,10 @@
             <div class="column4">
                 <div class="modulo-create">
                     <h4 class="create">Crear Produccion</h4>
-                    <input class="textlist" type="text" id="usuario" name="usuario" placeholder="Producto" required>
-                    <input type="button" class="button" value="Registrar">
+                    <form [formGroup]="newProductionForm" (ngSubmit)="createProduction()">
+                        <input class="text2" type="text" id="product_id" formControlName="product_id" placeholder="Producto" [style.border-color]="newProductionForm.get('name')?.invalid && newProductionForm.get('product_id')?.touched ? 'red' : ''" required>
+                        <input type="submit" class="button" value="Registrar">
+                    </form>
                 </div>
             </div>
         </div>

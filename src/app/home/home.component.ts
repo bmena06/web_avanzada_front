@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular
 import { DataService } from 'src/app/services/data.service';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 declare var $: any;
 
@@ -14,10 +15,15 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
   productions: any[] = [];
   dtoptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject<any>;
+  newProductionForm: FormGroup;
 
   @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective | any;
 
-  constructor(private dataService: DataService) {}
+  constructor(private dataService: DataService, private fb: FormBuilder) {
+    this.newProductionForm = this.fb.group({
+      product_id: ['', [Validators.required]],
+    });
+  }
 
   ngOnInit(): void {
     this.dtoptions = {
@@ -59,6 +65,37 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
   
+  createProduction() {
+    const user_id = localStorage.getItem('user_id');
+    console.log("ID:", user_id);
+    if (user_id && this.newProductionForm) {
+      const productionData = {
+        product_id: this.newProductionForm.value.product_id,
+        user_id: user_id,
+      };
   
-
+      console.log('Creando producción...', productionData);
+  
+      this.dataService.createProduction(productionData).subscribe(
+        () => {
+          console.log('Producción creada con éxito');
+          this.newProductionForm.reset();
+          this.loadProductions();
+        },
+        (error) => {
+          console.error('Error al crear la producción:', error);
+        }
+      );
+    } else {
+      alert('Debes llenar todos los campos y que sean correctos para la creación de la producción');
+      // Resalta visualmente los campos inválidos
+      Object.keys(this.newProductionForm.controls).forEach(key => {
+        const control = this.newProductionForm.get(key);
+        if (control?.invalid) {
+          control.markAsTouched();
+          control?.setErrors({ 'invalid': true });
+        }
+      });
+    }
+  }
 }

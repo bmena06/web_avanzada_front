@@ -5,7 +5,11 @@ $negro: #000000;
 $color-principal: #1ab188;
 
 
-  
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 body {
     position: fixed;
     background-color: rgb(243, 243, 243);

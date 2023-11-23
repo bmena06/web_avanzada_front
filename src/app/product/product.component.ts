@@ -82,6 +82,10 @@ export class productComponent implements OnInit, OnDestroy {
         },
         (error) => {
           console.error('Error al crear el producto:', error);
+  
+          if (error.status === 400 && error.error?.mensaje) {
+            alert(`Error: ${error.error.mensaje}`);
+          }
         }
       );
     } else {

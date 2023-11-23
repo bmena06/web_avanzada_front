@@ -25,8 +25,7 @@
                         <img class="icono" src="assets/image.png" alt="User">
                     </div>
                     <div class="column2">
-                        <h1>Usuario</h1>
-                        <h1>Rol</h1>
+                        <app-sesion></app-sesion>
                     </div>
                 </div>
             </div>
@@ -67,7 +66,9 @@
                         <input class="textlist2" type="email" id="email" formControlName="email" placeholder="Correo" [style.border-color]="newUserForm.get('email')?.invalid && newUserForm.get('email')?.touched ? 'red' : ''" required>
                         <input class="textlist3" type="password" id="password" formControlName="password" placeholder="Contraseña" [style.border-color]="newUserForm.get('password')?.invalid && newUserForm.get('password')?.touched ? 'red' : ''" required>
                         <input class="textlist4" type="text" id="rol" formControlName="rol_name" placeholder="Rol" [style.border-color]="newUserForm.get('rol_name')?.invalid && newUserForm.get('rol_name')?.touched ? 'red' : ''" required>
-                        <input type="submit" class="button" value="Crear Usuario">
+                        <div class="button-container">
+                            <input type="button" class="button" value="Crear Usuario">
+                        </div>                        
                     </form>
                 </div>
             </div>

@@ -34,21 +34,7 @@ th{
 .list{
     margin-top: 100px;
 }
-/*
-.container {
-    top: 0;
-    left: 0;
-    width: 100%;
-    position: fixed;
-    z-index: 99;
-    display: flex;
-    background-color: white;
-    border: 1px solid #ddd;
-    padding: 25px;
-    padding-left: 40px;
-    margin-bottom: 20px;
-}
-*/
+
 .body-containers{
     top: 0;
     left: 0;
@@ -256,11 +242,19 @@ input.button {
     justify-content: center; /* Centrar horizontalmente */
     padding-left: 10px;
     padding-right: 10px;
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover,
     &:active { /* Cambiar el color cuando se hace clic */
         background: $color-principal;
     }
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 //menu
@@ -361,6 +355,7 @@ input.button {
     display: flex;
     justify-content: space-between;
     border: 1px solid rgb(255, 255, 255);
+
   }
   
 
