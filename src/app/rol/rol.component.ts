@@ -44,11 +44,23 @@ export class RolComponent implements OnInit, OnDestroy {
     this.dtoptions = {
       scrollY: 300,
       language: {
-        searchPlaceholder: 'Buscar roles',
-      },
+        lengthMenu: "Mostrar _MENU_ registros por página",
+        zeroRecords: "Ningún usuario encontrado",
+        info: "Mostrando de _START_ a _END_ de un total de _TOTAL_ registros",
+        infoEmpty: "Ningún usuario encontrado",
+        infoFiltered: "(filtrados desde _MAX_ registros totales)",
+        search: "Buscar:",
+        loadingRecords: "Cargando...",
+        paginate: {
+            first: "Primero",
+            last: "Último",
+            next: "Siguiente",
+            previous: "Anterior"
+        }
+    },
       pagingType: 'full_numbers',
       paging: true,
-      pageLength: 9,
+      pageLength: 10,
     };
 
     // Inicializa DataTables y carga datos de roles

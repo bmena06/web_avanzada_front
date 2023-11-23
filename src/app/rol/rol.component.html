@@ -37,7 +37,7 @@
                     <h4>Rol</h4>
                 </div>
                 <div class="modulo2 my-4">
-                    <table datatable [dtOptions]="dtoptions" class="custom-table table table-striped" id="example">
+                    <table datatable [dtOptions]="dtoptions" class="cell-border display" id="example">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -62,7 +62,9 @@
                     <form [formGroup]="newRolForm" (ngSubmit)="createRol()">
                         <input class="text2" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newRolForm.get('name')?.invalid && newRolForm.get('name')?.touched ? 'red' : ''" required>
                         <input class="textlist2" type="number" id="compensacion" formControlName="compensation" placeholder="Compensación" [style.border-color]="newRolForm.get('compensation')?.invalid && newRolForm.get('compensation')?.touched ? 'red' : ''" required>
-                        <input type="submit" class="button" value="Crear Rol">
+                        <div class="button-container">
+                            <input type="submit" class="button" value="Crear Rol">
+                        </div>  
                     </form>
                 </div>
             </div>
