@@ -62,7 +62,7 @@
           <form [formGroup]="newProductForm" (ngSubmit)="createProduct()">          
             <input class="text2" type="text" id="nombre" formControlName="name" placeholder="Nombre" [style.border-color]="newProductForm.get('name')?.invalid && newProductForm.get('name')?.touched ? 'red' : ''" required>
             <input class="textlist2" type="number" id="precio" formControlName="price" placeholder="Precio" [style.border-color]="newProductForm.get('price')?.invalid && newProductForm.get('price')?.touched ? 'red' : ''" required>  
-            <input type="button" class="button" value="Crear Producto">
+            <input type="submit" class="button" value="Crear Producto">
         </form>         
         </div>
       </div>

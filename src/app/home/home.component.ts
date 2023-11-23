@@ -84,6 +84,13 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
         },
         (error) => {
           console.error('Error al crear la producción:', error);
+  
+          // Verificar si el error es por producto inexistente
+          if (error.status === 404 && error.error && error.error.mensaje) {
+            alert(error.error.mensaje);
+          } else {
+            alert('Error al crear la producción');
+          }
         }
       );
     } else {
