@@ -36,6 +36,8 @@
                     <h4>Pagos</h4>
                 </div>
                 <div class="modulo2 my-4">
+                    <button class="btn btn-primary" (click)="generatePdf()">Generar PDF</button>
+
                     <table datatable [dtOptions]="dtoptions" class="cell-border display" id="example">
                         <thead>
                             <tr>

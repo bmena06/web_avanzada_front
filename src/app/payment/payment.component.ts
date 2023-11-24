@@ -3,6 +3,8 @@ import { DataService } from 'src/app/services/data.service';
 import { Subject } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataTableDirective } from 'angular-datatables';
+import { jsPDF } from 'jspdf';
+
 
 // Componente Angular para gestionar pagos
 @Component({
@@ -25,6 +27,7 @@ export class PaymentComponent implements OnInit, OnDestroy {
 
   // Elemento de DataTables obtenido mediante ViewChild
   @ViewChild(DataTableDirective, { static: false }) dtElement: DataTableDirective | any;
+  searchTerm: any;
 
   // Constructor del componente
   constructor(private dataService: DataService, private fb: FormBuilder) {
@@ -100,39 +103,33 @@ export class PaymentComponent implements OnInit, OnDestroy {
   }
 
   // Método para crear un nuevo pago
-  createPayment() {
-    if (this.newPaymentForm.valid) {
-      // Imprime en consola el inicio del proceso de creación
-      console.log('Creando pago...', this.newPaymentForm.value);
-      
-      // Verificar la existencia de propiedades antes de acceder a ellas
-      const paymentId = this.newPaymentForm.value.id ? this.newPaymentForm.value.id : '';
-  
-      // Llama al servicio para crear el pago
-      this.dataService.createPaymentData({ id: paymentId }).subscribe(
-        () => {
-          // Imprime en consola el éxito en la creación
-          console.log('Pago creado con éxito');
-          
-          // Reinicia el formulario y recarga los datos de pagos
-          this.newPaymentForm.reset();
-          this.loadPaymentData();
-        },
-        (error) => {
-          // Imprime en consola en caso de error en la creación
-          console.error('Error al crear el pago:', error);
-        }
+  generatePdf() {
+    // Verificar si paymentData está definido
+    if (this.paymentData && this.paymentData.length > 0) {
+      // Obtener el pago seleccionado según el término de búsqueda
+      const selectedPayment = this.paymentData.find((payment: any) =>
+        payment.usuario.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
+  
+      if (selectedPayment) {
+        // Crear un nuevo documento PDF
+        const pdfDoc = new jsPDF();
+  
+        // Añadir contenido al PDF (puedes personalizar esto según tus necesidades)
+        pdfDoc.text(`ID: ${selectedPayment.id}`, 10, 10);
+        pdfDoc.text(`Usuario: ${selectedPayment.user_name}`, 10, 20);
+        pdfDoc.text(`Total a pagar: ${selectedPayment.total_payment}`, 10, 30);
+  
+        // Guardar el PDF con un nombre específico o simplemente abrirlo en una nueva ventana
+        // Puedes ajustar esto según tus necesidades
+        pdfDoc.save(`pago_${selectedPayment.id}.pdf`);
+      } else {
+        // Manejar el caso donde no se ha encontrado el pago
+        alert('No se encontró ningún pago con el usuario proporcionado.');
+      }
     } else {
-      // Alerta si el formulario no es válido y resalta visualmente los campos inválidos
-      alert('Debes llenar todos los campos y que sean correctos para la creación del pago');
-      Object.keys(this.newPaymentForm.controls).forEach((key) => {
-        const control = this.newPaymentForm.get(key);
-        if (control?.invalid) {
-          control.markAsTouched();
-          control?.setErrors({ invalid: true });
-        }
-      });
+      // Manejar el caso donde paymentData no está definido o está vacío
+      alert('No hay datos de pagos disponibles.');
     }
   }
 }
