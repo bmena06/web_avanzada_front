@@ -327,3 +327,11 @@ a {
     border: 1px solid rgb(255, 255, 255);
     
   }
+
+  button {
+    background-color: #0033a1;
+    color: #fff;  /* Texto en color blanco para mayor contraste */
+    padding: 10px 20px;  /* Ajusta el relleno según tus preferencias */
+    border: none;  /* Quita el borde para un aspecto más limpio */
+    cursor: pointer;  /* Cambia el cursor al pasar sobre el botón */
+  }
