@@ -4,7 +4,28 @@ $blanco: #fff;
 $negro: #000000;
 $color-principal: #1ab188;
 
-
+.button {
+    border: 1px solid black;
+    border: 0;
+    outline: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    background: $form-bg;
+    color: $blanco;
+    transition: all .5s ease;
+    appearance: $blanco;
+    -webkit-appearance: none;
+    justify-content: center; /* Centrar horizontalmente */
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 40px;
+    &:hover,
+    &:active { 
+        background: $color-principal;
+    }
+}
   
 body {
     position: fixed;

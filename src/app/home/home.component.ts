@@ -76,7 +76,8 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
   // Carga los datos de producciones desde el servicio
   loadProductions() {
-    this.dataService.getProductions().subscribe(data => {
+    const user_id = localStorage.getItem('user_id');
+    this.dataService.getProductions(user_id).subscribe(data => {
       // Actualiza DataTables con nuevos datos
       if (this.dtElement) {
         this.dtElement.dtInstance.then((dtInstance: DataTables.Api) => {

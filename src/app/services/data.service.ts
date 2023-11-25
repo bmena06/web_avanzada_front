@@ -137,8 +137,11 @@ export class DataService {
   // Operaciones para producciones
 
   // Método para obtener datos de producciones
-  getProductions(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/productions`, this.getHttpOptions());
+  getProductions(user_id: string | null): Observable<any> {
+    console.log("user_id a mandar:", user_id)
+    const url = user_id ? `${this.apiUrl}/productions?user_id=${user_id}` : `${this.apiUrl}/productions`;
+
+    return this.http.get(url, this.getHttpOptions());
   }
 
   // Método para crear una nueva producción
